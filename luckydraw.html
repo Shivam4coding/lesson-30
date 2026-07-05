@@ -1,0 +1,146 @@
+<!--
+1) Start the HTML document.
+   a) Use `<!DOCTYPE html>` to define the page as an HTML5 document.
+   b) Open the `<html>` tag.
+
+2) Create the head section.
+   a) Add internal CSS using the `<style>` tag.
+
+3) Style the webpage.
+   a) Style the `body` with font, background, text alignment, and padding.
+   b) Style the main heading using `h1`.
+   c) Style the input boxes with padding, margin, border, border radius, and width.
+   d) Style the button with background colour, text colour, padding, border radius, and cursor.
+   e) Style the timer text using the `#timer` ID.
+
+4) Create the page content.
+   a) Add the main heading "Lucky Draw".
+   b) Add a short instruction paragraph.
+   c) Add a text input for the user’s name.
+   d) Add a message paragraph for name validation.
+   e) Add a number input for the lucky number guess.
+   f) Add a message paragraph for guess validation.
+   g) Add a button that calls `checkForm()` when clicked.
+   h) Add paragraphs to show the result and timer.
+
+5) Add JavaScript using the `<script>` tag.
+   a) Create a `seconds` variable starting from 0.
+   b) Use `setInterval()` to increase the timer every second.
+   c) Display how long the user has stayed on the page.
+
+6) Create the `checkForm()` function.
+   a) Get the name value from the name input.
+   b) Get the guess value from the number input.
+   c) Create an `ok` variable to track whether the form is valid.
+
+7) Validate the name input.
+   a) If the name is empty, show an error message in red.
+   b) If the name is entered, show a success message in green.
+
+8) Validate the guess input.
+   a) If the guess is empty, show an error message in red.
+   b) If the guess is entered, show a success message in green.
+
+9) Generate the lucky number.
+   a) Check if the form is valid.
+   b) Use `Math.random()` and `Math.floor()` to generate a number from 1 to 5.
+
+10) Show the lucky draw result.
+   a) If the guess matches the lucky number, show a winning message.
+   b) If the guess does not match, show a try again message.
+   c) Change the result text colour based on the result.
+
+11) Close the `<script>`, `<body>`, and `<html>` tags to complete the webpage.
+-->
+<DOCTYPE html>
+   <html>
+
+   <head>
+      <style>
+         body {
+
+            font-family: Arial, sans-serif;
+            background: aliceblue;
+            text-align: center;
+            padding: 30px;
+         }
+         h1 {
+            color: navy;
+         }
+         input {
+            padding: 8px;
+            margin: 5px;
+            border: 2px solid navy;
+            border-radius: 6px;
+            width: 220px;
+
+         }
+         button {
+            background: navy;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+
+         }
+         #timer {
+
+            color: grey;
+
+         }
+      </style>
+      <title>Lucky Draw</title>
+   </head>
+   <body>
+      <h1>Lucky Draw</h1>
+      <p>Enter your name to play</p>
+      <input type="text" id="name" placeholder="Enter Your Name">
+      <p id="nameMessage"></p>
+      <p>Enter your lucky number guess</p>
+      <input type="number" id="guess" placeholder="Enter Your Lucky Number (1-5)">
+      <p id="guessMessage"></p>
+      <button onclick="checkForm()">Submit</button>
+      <p id="result"></p>
+      <p id="timer"></p>
+      <script>
+         var seconds = 0;
+         setInterval(function() {
+            seconds++;
+            document.getElementById("timer").innerHTML = "You have been here for " + seconds + " seconds";
+         }, 1000);
+         function checkForm() {
+            var name = document.getElementById("name").value;
+            var guess = document.getElementById("guess").value;
+            var ok = true;
+            if (name == "") {
+               document.getElementById("nameMessage").innerHTML = "Please enter your name";
+               ok = false;
+               document.getElementById("nameMessage").style.color = "red";
+            } else {
+               document.getElementById("nameMessage").innerHTML = "Name entered successfully";
+               document.getElementById("nameMessage").style.color = "green";
+            }
+            if (guess == "") {
+               document.getElementById("guessMessage").innerHTML = "Please enter your lucky number guess";
+               ok = false;
+               document.getElementById("guessMessage").style.color = "red";
+            } else {
+               document.getElementById("guessMessage").innerHTML = "Lucky number guess entered successfully";
+               document.getElementById("guessMessage").style.color = "green";
+            }
+            if (ok) {
+               var luckyNumber = Math.floor(Math.random() * 5) + 1;
+               if (luckyNumber == guess) {
+                  document.getElementById("result").innerHTML = "Congratulations! You won!";
+                  document.getElementById("result").style.color = "green";
+               } else {
+                  document.getElementById("result").innerHTML = "Sorry, try again!";
+                  document.getElementById("result").style.color = "red";
+               }
+
+            }
+         }
+      </script>
+      </body>
+      </html>
